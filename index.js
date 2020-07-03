@@ -1,17 +1,8 @@
-const simpleGit = require("simple-git");
-const git = simpleGit(__dirname);
-
-git
-  .checkIsRepo()
-  .then((isRepo) => !isRepo && initialiseRepo(git))
-  .then(() => git.fetch());
-
-function initialiseRepo(git) {
-  return git
-    .init()
-    .then(() => git.addRemote("master", "https://github.com/user/repo.git"));
-}
-console.log("wokring");
+require("simple-git")()
+  .add("./*")
+  .commit("first commit!")
+  .addRemote("origin", "https://github.com/ClementLiu/test.git")
+  .push(["-u", "origin", "master"], () => console.log("done"));
 /* 
 require("simple-git")()
   .init()
